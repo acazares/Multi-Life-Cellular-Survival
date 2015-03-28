@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		118879E01AC750390068A48F /* MultiplayerMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118879DF1AC750390068A48F /* MultiplayerMenuViewController.swift */; };
 		11A9D92A1AC73B4A009B3DBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9D9291AC73B4A009B3DBA /* AppDelegate.swift */; };
 		11A9D92C1AC73B4A009B3DBA /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 11A9D92B1AC73B4A009B3DBA /* GameScene.sks */; };
 		11A9D92E1AC73B4A009B3DBA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9D92D1AC73B4A009B3DBA /* GameScene.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		118879DF1AC750390068A48F /* MultiplayerMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerMenuViewController.swift; sourceTree = "<group>"; };
 		11A9D9241AC73B4A009B3DBA /* Multi-Life: Cellular Survival.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Multi-Life: Cellular Survival.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		11A9D9281AC73B4A009B3DBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11A9D9291AC73B4A009B3DBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				11A9D92D1AC73B4A009B3DBA /* GameScene.swift */,
 				11A9D92F1AC73B4A009B3DBA /* GameViewController.swift */,
 				11E507F01AC741850069AFD2 /* MainMenuViewController.swift */,
+				118879DF1AC750390068A48F /* MultiplayerMenuViewController.swift */,
 				11A9D9311AC73B4A009B3DBA /* Main.storyboard */,
 				11A9D9341AC73B4A009B3DBA /* Images.xcassets */,
 				11A9D9361AC73B4A009B3DBA /* LaunchScreen.xib */,
@@ -234,6 +237,7 @@
 			files = (
 				11E507F11AC741850069AFD2 /* MainMenuViewController.swift in Sources */,
 				11A9D92E1AC73B4A009B3DBA /* GameScene.swift in Sources */,
+				118879E01AC750390068A48F /* MultiplayerMenuViewController.swift in Sources */,
 				11A9D9301AC73B4A009B3DBA /* GameViewController.swift in Sources */,
 				11A9D92A1AC73B4A009B3DBA /* AppDelegate.swift in Sources */,
 			);

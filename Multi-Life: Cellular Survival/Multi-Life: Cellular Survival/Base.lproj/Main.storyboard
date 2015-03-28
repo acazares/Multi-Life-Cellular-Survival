@@ -30,7 +30,7 @@
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BV1-FR-VrT" kind="showDetail" id="kHn-AE-OJz"/>
+                                    <segue destination="eb8-OC-N9B" kind="showDetail" id="oou-Vx-gX3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -48,6 +48,67 @@
             </objects>
             <point key="canvasLocation" x="-318" y="361"/>
         </scene>
+        <!--Multiplayer Menu View Controller-->
+        <scene sceneID="vRL-0a-WSM">
+            <objects>
+                <viewController id="eb8-OC-N9B" customClass="MultiplayerMenuViewController" customModule="Multi_Life__Cellular_Survival" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EkB-EM-DdO"/>
+                        <viewControllerLayoutGuide type="bottom" id="NwM-Wj-9YK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2gq-as-yW5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Multiplayer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o6C-yz-HWY">
+                                <rect key="frame" x="230" y="116" width="140" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="kua-qg-Blo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clJ-E7-c5T">
+                                <rect key="frame" x="242" y="238" width="117" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Begin Match">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="showDetail" id="Xby-Eu-BTh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bM6-6R-SlJ">
+                                <rect key="frame" x="240" y="200" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="8v7-ss-hC1"/>
+                                    <constraint firstAttribute="height" constant="30" id="zEg-bb-OFV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Find Match">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="findMatch:" destination="eb8-OC-N9B" eventType="touchUpInside" id="hdn-rU-8Hd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="o6C-yz-HWY" firstAttribute="top" secondItem="EkB-EM-DdO" secondAttribute="bottom" constant="96" id="4qy-FM-uj1"/>
+                            <constraint firstItem="bM6-6R-SlJ" firstAttribute="top" secondItem="2gq-as-yW5" secondAttribute="top" constant="200" id="72w-hE-lWz"/>
+                            <constraint firstItem="clJ-E7-c5T" firstAttribute="top" secondItem="bM6-6R-SlJ" secondAttribute="bottom" constant="8" symbolic="YES" id="JXD-Fg-1Nd"/>
+                            <constraint firstItem="o6C-yz-HWY" firstAttribute="centerX" secondItem="bM6-6R-SlJ" secondAttribute="centerX" id="PTm-R4-wCr"/>
+                            <constraint firstItem="o6C-yz-HWY" firstAttribute="centerX" secondItem="2gq-as-yW5" secondAttribute="centerX" id="jA9-Pn-DM9"/>
+                            <constraint firstItem="o6C-yz-HWY" firstAttribute="centerX" secondItem="clJ-E7-c5T" secondAttribute="centerX" id="mVf-bD-ALk"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Czv-ZP-7gK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="356" y="361"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
@@ -64,7 +125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="320" y="361"/>
+            <point key="canvasLocation" x="1030" y="361"/>
         </scene>
     </scenes>
 </document>

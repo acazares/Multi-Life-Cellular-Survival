@@ -16,6 +16,7 @@
 		11A9D9381AC73B4A009B3DBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A9D9361AC73B4A009B3DBA /* LaunchScreen.xib */; };
 		11A9D9441AC73B4B009B3DBA /* Multi_Life__Cellular_SurvivalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A9D9431AC73B4B009B3DBA /* Multi_Life__Cellular_SurvivalTests.swift */; };
 		11A9D94E1AC73B8D009B3DBA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11A9D94D1AC73B8D009B3DBA /* GameKit.framework */; };
+		11E507F11AC741850069AFD2 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E507F01AC741850069AFD2 /* MainMenuViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		11A9D9421AC73B4B009B3DBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11A9D9431AC73B4B009B3DBA /* Multi_Life__Cellular_SurvivalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multi_Life__Cellular_SurvivalTests.swift; sourceTree = "<group>"; };
 		11A9D94D1AC73B8D009B3DBA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		11E507F01AC741850069AFD2 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				11A9D92B1AC73B4A009B3DBA /* GameScene.sks */,
 				11A9D92D1AC73B4A009B3DBA /* GameScene.swift */,
 				11A9D92F1AC73B4A009B3DBA /* GameViewController.swift */,
+				11E507F01AC741850069AFD2 /* MainMenuViewController.swift */,
 				11A9D9311AC73B4A009B3DBA /* Main.storyboard */,
 				11A9D9341AC73B4A009B3DBA /* Images.xcassets */,
 				11A9D9361AC73B4A009B3DBA /* LaunchScreen.xib */,
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11E507F11AC741850069AFD2 /* MainMenuViewController.swift in Sources */,
 				11A9D92E1AC73B4A009B3DBA /* GameScene.swift in Sources */,
 				11A9D9301AC73B4A009B3DBA /* GameViewController.swift in Sources */,
 				11A9D92A1AC73B4A009B3DBA /* AppDelegate.swift in Sources */,
@@ -431,6 +435,7 @@
 				11A9D9491AC73B4B009B3DBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		11A9D94A1AC73B4B009B3DBA /* Build configuration list for PBXNativeTarget "Multi-Life: Cellular SurvivalTests" */ = {
 			isa = XCConfigurationList;
@@ -439,6 +444,7 @@
 				11A9D94C1AC73B4B009B3DBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -12,7 +12,7 @@ import GameKit
 class MainMenuViewController: UIViewController {
     
     func authenticateLocalUser() {
-        println("Authenticating local user...");
+        println("Authenticating local player...");
         let localPlayer = GKLocalPlayer.localPlayer();
         localPlayer.authenticateHandler = { (view, error) -> Void in
             if (view != nil) {

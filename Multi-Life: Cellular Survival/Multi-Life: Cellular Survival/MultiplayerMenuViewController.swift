@@ -21,13 +21,13 @@ class MultiplayerMenuViewController: UIViewController, GKMatchmakerViewControlle
             self.presentViewController(mmvc, animated: true, completion: nil);
         }
         else {
-            println("Local user needs to be authenticated before finding a match.")
+            println("Local player needs to be authenticated before finding a match.")
         }
     }
     
     func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController!) {
         self.dismissViewControllerAnimated(true, completion: nil);
-        println("Local user cancelled the matchmaking process.");
+        println("Local player cancelled the matchmaking process.");
     }
     
     func matchmakerViewController(viewController: GKMatchmakerViewController!, didFailWithError error: NSError!) {

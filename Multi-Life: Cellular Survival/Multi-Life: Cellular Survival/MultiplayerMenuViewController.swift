@@ -11,33 +11,33 @@ import GameKit
 
 class MultiplayerMenuViewController: UIViewController, GKMatchmakerViewControllerDelegate {
     
-    @IBAction func findMatch(sender: UIButton) {
-        if (GKLocalPlayer.localPlayer().authenticated) {
-            let request = GKMatchRequest();
+    @IBAction func findMatch(sender: UIButton) { // "Find Match" button functionality
+        if (GKLocalPlayer.localPlayer().authenticated) { // The user is logged in to GameCenter
+            let request = GKMatchRequest(); // Create the match Request
             request.minPlayers = 2;
             request.maxPlayers = 2;
-            let mmvc = GKMatchmakerViewController(matchRequest: request);
-            mmvc.matchmakerDelegate = self;
-            self.presentViewController(mmvc, animated: true, completion: nil);
+            let mmvc = GKMatchmakerViewController(matchRequest: request); // Create matchmaker view with the request
+            mmvc.matchmakerDelegate = self; // Make the view controller the delegate
+            self.presentViewController(mmvc, animated: true, completion: nil); // Present the matchmaker view
         }
-        else {
+        else { // User is not logged in to GameCenter
             println("Local player needs to be authenticated before finding a match.")
         }
     }
     
-    func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController!) {
-        self.dismissViewControllerAnimated(true, completion: nil);
+    func matchmakerViewControllerWasCancelled(viewController: GKMatchmakerViewController!) { // User cancelled matchmaking
+        self.dismissViewControllerAnimated(true, completion: nil); // Remove matchmaker view
         println("Local player cancelled the matchmaking process.");
     }
     
-    func matchmakerViewController(viewController: GKMatchmakerViewController!, didFailWithError error: NSError!) {
-        self.dismissViewControllerAnimated(true, completion: nil);
+    func matchmakerViewController(viewController: GKMatchmakerViewController!, didFailWithError error: NSError!) { // Error occurred
+        self.dismissViewControllerAnimated(true, completion: nil); // Remove matchmaker view
         println("Matchmaking failed, printing error...");
-        println(error);
+        println(error); // Print error
     }
     
-    func matchmakerViewController(viewController: GKMatchmakerViewController!, didFindMatch match: GKMatch!) {
-        self.dismissViewControllerAnimated(true, completion: nil);
+    func matchmakerViewController(viewController: GKMatchmakerViewController!, didFindMatch match: GKMatch!) { // Match was established
+        self.dismissViewControllerAnimated(true, completion: nil); // Remove matchmaker view
         println("A match has been established.")
     }
 }

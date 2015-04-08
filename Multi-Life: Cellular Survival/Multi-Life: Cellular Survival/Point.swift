@@ -8,12 +8,14 @@
 
 import Foundation
 
-struct Point: Equatable {
-    
+struct Point: Equatable // Equatable: allows the == operator to be written
+{
     var x:Int = 0;
     var y:Int = 0;
 }
 
-func ==(lhs: Point, rhs: Point) -> Bool {
+// Equality operator for this structure
+func ==(lhs: Point, rhs: Point) -> Bool // lhs & rhs are standard variables for each object being compared
+{
     return lhs.x == rhs.x && lhs.y == rhs.y;
 }

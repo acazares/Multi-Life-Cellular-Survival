@@ -8,6 +8,13 @@
 
 import Foundation
 
-protocol Cell {
+protocol Cell
+{
+    /*
+    isAlive() -> Bool
+    
+    This method will simply return the state of the cell. If it's an alive cell
+    it will return true and if it's a dead cell it will return false.
+    */
     func isAlive() -> Bool;
 }

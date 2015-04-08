@@ -8,118 +8,172 @@
 
 import Foundation
 
-class Population {
+class Population
+{
+    var grid:[[Cell]]; // Grid of Cell's as a 2D Array
+    let gridRows:Int = 100; // "Height"
+    let gridColumns:Int = 100; // "Width"
     
-    var grid:[[Cell]];
-    let gridRows:Int = 100;
-    let gridColumns:Int = 100;
-    
-    init() {
-        self.grid = [[]];
-        self.killCells();
+    // Constructor
+    init()
+    {
+        self.grid = [[]]; // Set the grid to be empty
+        self.killCells(); // Creates DeadCell's in the grid
     }
     
-    func updatePopulation() {
-        var newPopulation = [[Cell]]();
-        for (var r = 0; r < self.gridColumns; r++) {
-            for (var c = 0; c < self.gridColumns; c++) {
-                var neighborsAlive:Int = 0;
+    func updatePopulation()
+    {
+        var newPopulation = [[Cell]](); // Grid of Cells that will become the new Population
+        for (var r = 0; r < self.gridColumns; r++) { // Traverse the rows
+            for (var c = 0; c < self.gridColumns; c++) { // Traverse the columns
+                var neighborsAlive:Int = 0; // Number of AliveCell's that are neighbors of the (r,c) Cell
                 
-                var left:Int = max(0, c-1);
-                var right:Int = min(c+1, self.gridColumns-1);
-                var up:Int = max(0, r-1);
-                var down:Int = min(r+1, gridRows-1);
-                var neighbors = [Point]();
+                var left:Int = max(0, c-1); // Left column
+                var right:Int = min(c+1, self.gridColumns-1); // Right column
+                var up:Int = max(0, r-1); // Top row
+                var down:Int = min(r+1, gridRows-1); // Bottom row
                 
-                var topLeftN:Point = Point(x: left, y: up);
-                var leftN:Point = Point(x: left, y: r);
-                var bottomLeftN:Point = Point(x: left, y: down);
-                var upN:Point = Point(x: c, y: up);
-                var downN:Point = Point(x: c, y: down);
-                var topRightN:Point = Point(x: right, y: up);
-                var rightN:Point = Point(x: right, y: r);
-                var bottomRightN:Point = Point(x: right, y: down);
+                var neighbors = [Point](); // Array that will hold the locations of the neighbors of the (r,c) Cell
                 
-                var currentCell:Point = Point(x: c, y: r);
+                var topLeftN:Point = Point(x: left, y: up); // Top left neighbor
+                var leftN:Point = Point(x: left, y: r); // Left neighbor
+                var bottomLeftN:Point = Point(x: left, y: down); // Bottom left neighbor
+                var upN:Point = Point(x: c, y: up); // Top neighbor
+                var downN:Point = Point(x: c, y: down); // Bottom neighbor
+                var topRightN:Point = Point(x: right, y: up); // Top right neighbor
+                var rightN:Point = Point(x: right, y: r); // Right neighbor
+                var bottomRightN:Point = Point(x: right, y: down); // Bottom right neighbor
                 
-                if (topLeftN != currentCell) {
+                var currentCell:Point = Point(x: c, y: r); // Location of current (c,r)
+                
+                /*
+                The next 8 "if" statements will make sure all actual neighbors are added to the
+                array of neighbors. When a cell is on some edge of the grid, it will not have all
+                8 neighbors. When computing neighbors above, if a neighbor does not exist the math
+                will make the non-existent neighbor the current (c,r) cell. These Points should
+                not be added to the array.
+                */
+                if (topLeftN != currentCell)
+                {
                     neighbors.append(topLeftN);
                 }
-                if (leftN != currentCell) {
+                if (leftN != currentCell)
+                {
                     neighbors.append(leftN);
                 }
-                if (bottomLeftN != currentCell) {
+                if (bottomLeftN != currentCell)
+                {
                     neighbors.append(bottomLeftN);
                 }
-                if (upN != currentCell) {
+                if (upN != currentCell)
+                {
                     neighbors.append(upN);
                 }
-                if (downN != currentCell) {
+                if (downN != currentCell)
+                {
                     neighbors.append(downN);
                 }
-                if (topRightN != currentCell) {
+                if (topRightN != currentCell)
+                {
                     neighbors.append(topRightN);
                 }
-                if (rightN != currentCell) {
+                if (rightN != currentCell)
+                {
                     neighbors.append(rightN);
                 }
-                if (bottomRightN != currentCell) {
+                if (bottomRightN != currentCell)
+                {
                     neighbors.append(bottomRightN);
                 }
                 
-                for neighbor in neighbors {
-                    if (self.isCellAlive(neighbor.x, gridColumn: neighbor.y)) {
-                        neighborsAlive++;
+                for neighbor in neighbors
+                {
+                    if (self.isCellAlive(neighbor.x, gridColumn: neighbor.y)) // Checks to see if a neighbor is alive
+                    {
+                        neighborsAlive++; // Count the number of AliveCells
                     }
                 }
                 
-                if (self.isCellAlive(r, gridColumn: c)) {
-                    if (neighborsAlive < 2 || neighborsAlive > 3) {
-                        newPopulation[r][c] = DeadCell();
+                /*
+                This "if" statement will determine whether the current (c,r) cell will be
+                alive or dead in the next generation
+                */
+                if (self.isCellAlive(r, gridColumn: c)) { // Cell is alive
+                    if (neighborsAlive < 2 || neighborsAlive > 3) { // Has less than 2 or greater than 3 neighbors
+                        newPopulation[r][c] = DeadCell(); // Dies
                     }
                     else {
-                        newPopulation[r][c] = AliveCell();
+                        newPopulation[r][c] = AliveCell(); // Lives
                     }
                 }
-                else {
-                    if (neighborsAlive == 3) {
-                        newPopulation[r][c] = AliveCell();
+                else { // Cell is Dead
+                    if (neighborsAlive == 3) { // Has exactly three alive neighbors
+                        newPopulation[r][c] = AliveCell(); // Comes back to life
                     }
                     else {
-                        newPopulation[r][c] = DeadCell();
+                        newPopulation[r][c] = DeadCell(); // Stays dead
                     }
                 }
             }
         }
-        self.grid = newPopulation;
+        self.grid = newPopulation; // Update the grid
     }
     
+    /*
+    killCells() -> void
     
-    func killCells() {
-        for (var r = 0; r < self.gridRows; r++) {
-            for (var c = 0; c < self.gridColumns; c++) {
-                self.killCell(r,gridColumn: c);
+    Creates DeadCell's in the entire grid.
+    */
+    func killCells()
+    {
+        for (var r = 0; r < self.gridRows; r++) { // Traverse the row
+            for (var c = 0; c < self.gridColumns; c++) { // Traverse the column
+                self.killCell(r,gridColumn: c); // "Kill" cell at (r,c)
             }
         }
     }
     
-    func killCell(gridRow:Int, gridColumn:Int) {
+    /*
+    killCell(int,int) -> void
+    
+    Creates a DeadCell at the location in the grid specified
+    by the inputs. The first int specifying which row and the
+    second which column.
+    */
+    func killCell(gridRow:Int, gridColumn:Int)
+    {
         self.grid[gridRow][gridColumn] = DeadCell();
     }
     
-    func isCellAlive(gridRow:Int, gridColumn:Int) -> Bool {
+    /*
+    isCellAlive(int,int) -> bool
+    
+    Returns whether the cell at the location specified in the 
+    grid is alive. The first int specifying which row and the
+    second which column.
+    */
+    func isCellAlive(gridRow:Int, gridColumn:Int) -> Bool
+    {
         return self.grid[gridRow][gridColumn].isAlive();
     }
     
-    func currentAliveCells() -> Array<Point> {
-        var aliveCells = [Point]();
-        for (var r = 0; r < self.gridRows; r++) {
-            for (var c = 0; r < self.gridColumns; r++) {
-                if (self.grid[r][c].isAlive()) {
-                    aliveCells.append(Point(x: r, y: c));
+    /*
+    currentAliveCells() -> Array<Point>
+    
+    Returns the locations of all the AliveCell's in the grid 
+    as an Array of Points.
+    */
+    
+    func currentAliveCells() -> Array<Point>
+    {
+        var aliveCells = [Point](); // Initialize the Array that will hold the AliveCell's
+        for (var r = 0; r < self.gridRows; r++) { // Traverse the rows
+            for (var c = 0; r < self.gridColumns; r++) { // Traverse the columns
+                if (self.grid[r][c].isAlive()) { // Cell at specified location is alive
+                    aliveCells.append(Point(x: r, y: c)); // Add it to the array
                 }
             }
         }
-        return aliveCells;
+        return aliveCells; // Return the array containing the Point's of AliveCells
     }
 }

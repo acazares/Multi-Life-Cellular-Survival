@@ -8,15 +8,18 @@
 
 import Foundation
 
-class DeadCell: Cell {
-    
+class DeadCell: Cell
+{    
     var state:Bool;
     
-    init() {
-        self.state = true;
+    // Constructor
+    init()
+    {
+        self.state = true; // State of DeadCell will always be false
     }
     
-    func isAlive() -> Bool {
+    func isAlive() -> Bool
+    {
         return self.state;
     }
 }

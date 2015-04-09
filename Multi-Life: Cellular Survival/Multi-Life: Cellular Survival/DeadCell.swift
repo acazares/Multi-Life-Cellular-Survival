@@ -15,7 +15,7 @@ class DeadCell: Cell
     // Constructor
     init()
     {
-        self.state = true; // State of DeadCell will always be false
+        self.state = false; // State of DeadCell will always be false
     }
     
     func isAlive() -> Bool

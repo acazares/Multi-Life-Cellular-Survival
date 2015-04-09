@@ -11,20 +11,36 @@ import Foundation
 class Population
 {
     var grid:[[Cell]]; // Grid of Cell's as a 2D Array
-    let gridRows:Int = 100; // "Height"
-    let gridColumns:Int = 100; // "Width"
+    let gridRows:Int; // "Height"
+    let gridColumns:Int; // "Width"
     
     // Constructor
     init()
     {
-        self.grid = [[]]; // Set the grid to be empty
-        self.killCells(); // Creates DeadCell's in the grid
+        self.grid = [[Cell]](); // Set the grid to be empty
+        
+        for (var c = 0; c < 22; c++)
+        {
+            self.grid.append([Cell]());
+            self.grid[c] = [Cell](count: 32, repeatedValue: DeadCell());
+        }
+
+        self.gridRows = grid.count;
+        self.gridColumns = grid[0].count;
     }
     
-    func updatePopulation()
+    func updatePopulation() -> Void
     {
         var newPopulation = [[Cell]](); // Grid of Cells that will become the new Population
-        for (var r = 0; r < self.gridColumns; r++) { // Traverse the rows
+        
+        for (var c = 0; c < 22; c++)
+        {
+            newPopulation.append([Cell]());
+            newPopulation[c] = [Cell](count: 32, repeatedValue: DeadCell());
+        }
+        
+        
+        for (var r = 0; r < self.gridRows; r++) { // Traverse the rows
             for (var c = 0; c < self.gridColumns; c++) { // Traverse the columns
                 var neighborsAlive:Int = 0; // Number of AliveCell's that are neighbors of the (r,c) Cell
                 
@@ -88,7 +104,7 @@ class Population
                 
                 for neighbor in neighbors
                 {
-                    if (self.isCellAlive(neighbor.x, gridColumn: neighbor.y)) // Checks to see if a neighbor is alive
+                    if (self.isCellAlive(neighbor.y, gridColumn: neighbor.x)) // Checks to see if a neighbor is alive
                     {
                         neighborsAlive++; // Count the number of AliveCells
                     }
@@ -120,32 +136,6 @@ class Population
     }
     
     /*
-    killCells() -> void
-    
-    Creates DeadCell's in the entire grid.
-    */
-    func killCells()
-    {
-        for (var r = 0; r < self.gridRows; r++) { // Traverse the row
-            for (var c = 0; c < self.gridColumns; c++) { // Traverse the column
-                self.killCell(r,gridColumn: c); // "Kill" cell at (r,c)
-            }
-        }
-    }
-    
-    /*
-    killCell(int,int) -> void
-    
-    Creates a DeadCell at the location in the grid specified
-    by the inputs. The first int specifying which row and the
-    second which column.
-    */
-    func killCell(gridRow:Int, gridColumn:Int)
-    {
-        self.grid[gridRow][gridColumn] = DeadCell();
-    }
-    
-    /*
     isCellAlive(int,int) -> bool
     
     Returns whether the cell at the location specified in the 
@@ -168,12 +158,27 @@ class Population
     {
         var aliveCells = [Point](); // Initialize the Array that will hold the AliveCell's
         for (var r = 0; r < self.gridRows; r++) { // Traverse the rows
-            for (var c = 0; r < self.gridColumns; r++) { // Traverse the columns
+            for (var c = 0; c < self.gridColumns; c++) { // Traverse the columns
                 if (self.grid[r][c].isAlive()) { // Cell at specified location is alive
-                    aliveCells.append(Point(x: r, y: c)); // Add it to the array
+                    aliveCells.append(Point(x: c, y: r)); // Add it to the array
                 }
             }
         }
         return aliveCells; // Return the array containing the Point's of AliveCells
     }
+    
+    /*
+    resurrect(int,int) -> void
+    
+    This method will set an AliveCell at the specified location. The 
+    first int specifying which row and the second which column.
+    */
+    
+    func resurrect(gridRow:Int, gridColumn:Int)
+    {
+        self.grid[gridRow][gridColumn] = AliveCell();
+    }
 }
+
+
+

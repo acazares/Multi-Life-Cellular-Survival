@@ -7,25 +7,27 @@
 //
 
 import SpriteKit
+import GameKit
 
 class GameScene: SKScene
 {
-
+    var game:GameMatch = GameMatch();
     let pixelSize:CGFloat = 32.0;
-    var world:Population = Population();
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
+        game.setMatchDelegate();
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         /* Called when a touch begins */
         for touch: AnyObject in touches
         {
             let location = touch.locationInNode(self);
             let point = convertPixelsToPoint(location);
-            world.resurrect(point.y, gridColumn: point.x);
-            self.drawCell(point);
+            game.sendPosition(point);
+            game.world.resurrect(point.x, gridRow: point.y);
+            drawCell(point);
         }
     }
    
@@ -44,26 +46,27 @@ class GameScene: SKScene
         if (timeSinceLastTick > 1.5)
         {
             timeSinceLastTick = 0;
-            world.updatePopulation();
-            self.removeAllChildren();
-            self.drawCells();
+            game.world.updatePopulation();
+            removeAllChildren();
+            drawCells();
+        
         }
     }
     
     func convertPointToPixels(point:Point) -> CGPoint
     {
-        return CGPointMake((CGFloat(point.x) * self.pixelSize), (CGFloat(point.y) * self.pixelSize));
+        return CGPointMake((CGFloat(point.x) * pixelSize), (CGFloat(point.y) * pixelSize));
     }
     
     func convertPixelsToPoint(pixel:CGPoint) -> Point
     {
-        return Point(x: Int(pixel.x / self.pixelSize), y: Int(pixel.y / self.pixelSize));
+        return Point(x: Int(pixel.x / pixelSize), y: Int(pixel.y / pixelSize));
     }
     
     
     func drawCells() -> Void
     {
-        for cell in world.currentAliveCells()
+        for cell in game.world.currentAliveCells()
         {
             drawCell(cell);
         }
@@ -75,7 +78,7 @@ class GameScene: SKScene
         sprite.color = UIColor.cyanColor();
         sprite.size = CGSizeMake(pixelSize, pixelSize);
         sprite.position = convertPointToPixels(point);
-        self.addChild(sprite);
+        addChild(sprite);
         return sprite;
     }
 }

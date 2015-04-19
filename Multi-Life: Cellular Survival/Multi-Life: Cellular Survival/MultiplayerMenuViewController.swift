@@ -11,6 +11,8 @@ import GameKit
 
 class MultiplayerMenuViewController: UIViewController, GKMatchmakerViewControllerDelegate {
     
+    var myMatch:GKMatch = GKMatch();
+    
     @IBAction func findMatch(sender: UIButton) { // "Find Match" button functionality
         if (GKLocalPlayer.localPlayer().authenticated) { // The user is logged in to GameCenter
             let request = GKMatchRequest(); // Create the match Request
@@ -38,6 +40,7 @@ class MultiplayerMenuViewController: UIViewController, GKMatchmakerViewControlle
     
     func matchmakerViewController(viewController: GKMatchmakerViewController!, didFindMatch match: GKMatch!) { // Match was established
         self.dismissViewControllerAnimated(true, completion: nil); // Remove matchmaker view
+        self.myMatch = match;
         println("A match has been established.")
     }
 }

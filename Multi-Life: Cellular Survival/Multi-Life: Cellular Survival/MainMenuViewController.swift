@@ -20,6 +20,7 @@ class MainMenuViewController: UIViewController {
             }
             else if (localPlayer.authenticated) { // The user has already been authenticated
                 println("Local player has been authenticated.");
+                self.dismissViewControllerAnimated(true, completion: nil);
             }
             else { // An error occurred
                 println("Local player couldn't be auhenticated. Printing error...");

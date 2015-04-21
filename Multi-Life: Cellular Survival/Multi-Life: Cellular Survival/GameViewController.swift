@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import GameKit
 
 extension SKNode {
     class func unarchiveFromFile(file : NSString) -> SKNode? {

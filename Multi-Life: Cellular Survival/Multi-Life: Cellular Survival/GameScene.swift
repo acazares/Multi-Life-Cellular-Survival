@@ -9,14 +9,14 @@
 import SpriteKit
 import GameKit
 
-class GameScene: SKScene
+class GameScene: SKScene, GCHelperDelegate
 {
-    var game:GameMatch = GameMatch();
+    var world:Population = Population();
     let pixelSize:CGFloat = 32.0;
     
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        game.setMatchDelegate();
+        GCHelper.sharedInstance.delegate = self;
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -25,8 +25,8 @@ class GameScene: SKScene
         {
             let location = touch.locationInNode(self);
             let point = convertPixelsToPoint(location);
-            game.sendPosition(point);
-            game.world.resurrect(point.x, gridRow: point.y);
+            sendPosition(point);
+            world.resurrect(point.x, gridRow: point.y);
             drawCell(point);
         }
     }
@@ -46,7 +46,7 @@ class GameScene: SKScene
         if (timeSinceLastTick > 1.5)
         {
             timeSinceLastTick = 0;
-            game.world.updatePopulation();
+            world.updatePopulation();
             removeAllChildren();
             drawCells();
         
@@ -66,7 +66,7 @@ class GameScene: SKScene
     
     func drawCells() -> Void
     {
-        for cell in game.world.currentAliveCells()
+        for cell in world.currentAliveCells()
         {
             drawCell(cell);
         }
@@ -78,7 +78,30 @@ class GameScene: SKScene
         sprite.color = UIColor.cyanColor();
         sprite.size = CGSizeMake(pixelSize, pixelSize);
         sprite.position = convertPointToPixels(point);
-        addChild(sprite);
+        self.addChild(sprite);
         return sprite;
     }
+    
+    func sendPosition(posn:Point) -> Void {
+        var error:NSError?;
+        var msg:Point = posn;
+        var packet:NSData = NSData(bytes: &msg, length: sizeof(Point));
+        let success:Bool = GCHelper.match.sendDataToAllPlayers(packet, withDataMode: GKMatchSendDataMode.Reliable, error: &error);
+        if (!success) {
+            println("An error has occurred while sending data");
+            print(error);
+        }
+        else
+        {
+            println("Packet has been sent");
+        }
+    }
+    
+    func match(match: GKMatch, didReceiveData data: NSData, fromPlayer playerID: String)
+    {
+        let packet:Point = UnsafePointer<Point>(data.bytes).memory;
+        self.world.resurrect(packet.x, gridRow: packet.y);
+        self.drawCell(packet);
+    }
+    
 }
